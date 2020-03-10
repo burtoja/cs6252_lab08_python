@@ -31,8 +31,7 @@ class NameDB:
                 name_list = []
                 name_data = json.load(names_json)
                 for name_entry in name_data['names'] :
-                    name_list.append(name_entry)
-                    print('NAME LIST: {}'.format(name_list))                
+                    name_list.append(name_entry)              
                 return name_list
         except:
             return None

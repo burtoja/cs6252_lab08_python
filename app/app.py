@@ -15,21 +15,22 @@ names = Names(name_db.read_names())
 @app.route('/names')
 def get_names():
     all_names = names.get_all()
-    print('========RAW ALL NAMES: {}'.format(all_names))
-    return json.dumps({"names": all_names}), 200;
+    return json.dumps({"names": all_names}), 200
 
 @app.route('/names', methods=['POST'])
 def add_names():
     request_data = request.get_json()
-    print('-------------POST REQUEST DATA: {} -----------------'.format(request_data['names']))
-    print('*************VERIFY NAME SENT:  {} *****************'.format(request_data['names'][0]['name']))
     for name_entry in request_data['names'] :
-        print('-------------LOOP DATA: {} -----------------'.format(name_entry))
-        print('+++++++++++++PLEASE PRINT NAME: {}'.format(name_entry['name']))
         result = names.add(name_entry)
         print('NAME LIST RETURN VALUE = {}'.format(result))
         name_db.write_names(result)
     return jsonify(result)
     
-    
+@app.route('/name/<string:name>')
+def get_name_details(name):
+    all_names = names.get_all()
+    for entry in all_names :
+        if entry['name'] == name:
+            return jsonify(entry), 200
+    return jsonify({'message': 'name not found'}), 404 
 
