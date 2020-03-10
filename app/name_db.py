@@ -48,10 +48,13 @@ class NameDB:
         the name_object_list, where the list is wrapped in a 
         dictionary entry with key "names"
         """
-        with open('names.json') as names_json:
-            data = json.load(names_json)
-            temp = data['names']
-            temp.append(name_object_list)
-        with open('names.json', 'w') as names_json: 
-            json.dump(data, names_json)
+        try:
+            with open('names.json') as names_json:
+                data = json.load(names_json)
+                temp = data['names']
+                temp.append(name_object_list)
+            with open('names.json', 'w') as names_json: 
+                json.dump(data, names_json)
+        except:
+            return None
             
