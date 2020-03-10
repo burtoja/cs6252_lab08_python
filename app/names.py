@@ -25,10 +25,10 @@ class Names:
     
     def get(self, name):
         """
-        Returns the dictionary with key-0vaue pair ("name", name)
+        Returns the dictionary with key-value pair ("name", name)
         
         Returns None if the dictionary with the specified name is not 
-        contained in  this list of names; otherwise, retruns the 
+        contained in  this list of names; otherwise, returns the 
         dictionary with the specified name
         """
         for name_object in self.names:
@@ -42,7 +42,7 @@ class Names:
         Adds a new dictionary representing a name
         
         Returns None if the specified dictionary does not contain 
-        the kay "name" or if the key "name" is mapped to  aname that 
+        the key "name" or if the key "name" is mapped to  name that 
         is already included in this name list; otherwise, returns the 
         added dictionary representing a name
         """
@@ -62,7 +62,7 @@ class Names:
         Deletes the dictionary with the key-value pair ("name", name)
         
         Returns None if the dictionary with the specified name is not 
-        contained in this list of names; otherwise, retruns the deleted 
+        contained in this list of names; otherwise, returns the deleted 
         dictionary 
         """
         remove_name_object = None
