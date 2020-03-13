@@ -30,14 +30,14 @@ def get_name_details(name):
 
 @app.route('/name', methods=['POST'])
 def add_names():
-    request_data = request.get_json()
-    for name_entry in request_data['names'] :
-        if 'name' in name_entry :                           #check to see if the name key is in this JSON from POST 
-            if names.get(name_entry['name']) == None :      #name is not present in local dictionary so need to add it
-                result = names.add(name_entry) 
+    post_request_data = request.get_json()
+    for post_name_entry in post_request_data['names'] :
+        if 'name' in post_name_entry :                            
+            if names.get(post_name_entry['name']) == None :     
+                result = names.add(post_name_entry) 
                 name_db.write_names(result) 
                 return jsonify(result), 201
-            else :                                           #name is present in dictionary so no changes made
+            else :                                           
                 return jsonify({'message': 'Error! Name already exists.  No changes made.'}), 400
         else :
             return jsonify({'message': 'Error! Missing name in sent data'}), 400 
@@ -47,13 +47,13 @@ def add_names():
 def update_names():
     post_request_data = request.get_json()
     for post_name_entry in post_request_data['names'] :
-        if 'name' in post_name_entry :                           #check to see if the name key is in this JSON from POST
-            local_entry = names.get(post_name_entry['name'])        #dictionary
-            if local_entry == None :                             #name is not present in dictionary so need to add it
+        if 'name' in post_name_entry :                           
+            local_entry = names.get(post_name_entry['name'])        
+            if local_entry == None :                             
                 local_result = names.add(post_name_entry) 
                 name_db.write_names(local_result) 
                 return jsonify(local_result), 201
-            else :                                          #name is present in dictionary so needs info update
+            else :                                          
                 post_keys = []
                 for post_key in post_name_entry :
                     post_keys.append(post_key)
@@ -76,7 +76,4 @@ def delete_name(name):
         else:
             names.delete(name) 
             return jsonify(name_info), 200
-        
-    
-        
         
